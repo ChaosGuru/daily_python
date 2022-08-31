@@ -1,4 +1,5 @@
 import doctest
+import hypothesis
 import sys
 import unittest
 
@@ -23,6 +24,10 @@ class TestFunctions(unittest.TestCase):
 
     def test_fail(self):
         self.assertEqual(add(0, 0), 100)
+
+    @hypothesis.given(a=hypothesis.strategies.integers(), b=hypothesis.strategies.integers())
+    def test_addition(self, a, b):
+        self.assertEqual(add(a, b), a+b)
 
 
 def test_add_function():
